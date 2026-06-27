@@ -1,0 +1,26 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: shop
+    description: "OLTP e-commerce schema from Week 2."
+    tables:
+      - name: orders
+        description: "One row per order header."
+        columns:
+          - name: order_id
+            tests: [unique, not_null]
+          - name: customer_id
+            tests: [not_null]
+          - name: status
+            tests:
+              - accepted_values:
+                  values: ['new', 'paid', 'shipped', 'delivered', 'cancelled']
+      - name: order_item
+        description: "One row per line item."
+      - name: customer
+        description: "Customer master."
+      - name: product
+        description: "Product master."
+      - name: category
+        description: "Product categories."

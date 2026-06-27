@@ -1,0 +1,16 @@
+version: 2
+
+models:
+  - name: stg_orders
+    description: "Cleaned and renamed orders from the OLTP shop schema."
+    columns:
+      - name: order_id
+        tests: [unique, not_null]
+      - name: customer_id
+        tests: [not_null]
+      - name: total_usd
+        tests: [not_null]
+      - name: status
+        tests:
+          - accepted_values:
+              values: ['new', 'paid', 'shipped', 'delivered', 'cancelled']
